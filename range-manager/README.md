@@ -3,6 +3,25 @@
 A `RangeManager` is a custom application designed for managing ranges within a *Google Sheets* spreadsheet. 
 It allows you to perform various operations such as *updating*, *deleting*, *appending*, and *filtering* data within specified ranges. 
 
+## Table of contents
+- [RangeManager](#rangemanager)
+  * [Documentation](#documentation)
+    + [constructor(options)](#constructor-options-)
+    + [where(options)](#where-options-)
+      - [between](#between)
+      - [deepEqual](#deepequal)
+      - [equal (Implicit vs. Explicit)](#equal--implicit-vs-explicit-)
+      - [excludes](#excludes)
+      - [gte](#gte)
+      - [gt](#gt)
+      - [includes](#includes)
+      - [lt](#lt)
+      - [lte](#lte)
+      - [match](#match)
+      - [matchAny](#matchany)
+    + [Combining Filters using `where`](#combining-filters-using--where-)
+  * [update(data)](#update-data-)
+  * [fetch(colNames)](#fetch-colnames-)
 
 ## Documentation
 
