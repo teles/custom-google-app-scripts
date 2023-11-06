@@ -167,7 +167,7 @@ const manager = new RangeManager({ sheet: 'Sales' });
 // Combine multiple filters using logical AND
 manager.where({ product: 'Laptop', price: { between: [500, 1000] }});
 
-// Combine filters to find products that are either in stock or have a high rating
+// Combine filters to find products that are either in stock AND have a high rating
 manager.where({ stock: { gt: 0 }, rating: { gte: 4.5 } });
 ```
 
