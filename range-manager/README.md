@@ -221,3 +221,47 @@ After applying the where method, we have selected the following records:
 After applying the where method to select items with a quantity greater than 0, we can update the status of these records with the provided data. In this example, the status of selected items has been updated to "In Stock (Updated)" using the update method.
 
 This demonstrates how to use the update method in conjunction with the where method to modify data within specific ranges, making it a powerful tool for managing and updating spreadsheet information.
+
+## fetch(colNames)
+
+Fetches the data from the specified ranges and returns it as an array of objects.
+
+* `colNames (Array, optional)`: An array of column names to include in the fetched data. If not specified, it will include all columns.
+* Returns an array of objects representing the fetched data.
+
+Example:
+Consider the following sample spreadsheet:
+
+| Product    | Quantity | Price | Status    |
+|------------|----------|-------|-----------|
+| Laptop     | 5        | 800   | In Stock  |
+| Smartphone | 10       | 600   | In Stock  |
+| Tablet     | 0        | 300   | Out Stock |
+| Camera     | 2        | 1200  | In Stock  |
+
+```JavaScript
+const manager = new RangeManager({ sheet: 'Inventory' });
+
+// Apply a filter to select items with a quantity greater than 0
+manager.where({
+  Quantity: { gt: 0 }
+});
+
+// Fetch data for the selected items, including specific columns
+const fetchedData = manager.fetch(['Product', 'Quantity', 'Status']);
+```
+
+The fetch method, in this example, selects items with a quantity greater than 0 using the where method. We then use fetch to retrieve data for the selected items, including only the columns 'Product', 'Quantity', and 'Status'. The fetched data is returned as an array of objects.
+
+Output object:
+
+```JavaScript
+[
+  { Product: 'Laptop', Quantity: 5, Status: 'In Stock' },
+  { Product: 'Smartphone', Quantity: 10, Status: 'In Stock' },
+  { Product: 'Camera', Quantity: 2, Status: 'In Stock' }
+]
+```
+
+The `fetch` method allows you to extract specific data from your spreadsheet, and the output is an array of objects where each object represents a row of data. You can choose which columns to include in the output based on your requirements.
+
