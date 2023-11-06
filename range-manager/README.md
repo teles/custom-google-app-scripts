@@ -155,3 +155,20 @@ new RangeManager({ sheet: 'Messages' }).where({ text: { matchAny: [/hello/i, /go
 // Filter messages containing either 'hello' or 'goodbye' case-insensitively
 ```
 
+### Combining Filters using `where`
+
+You can combine multiple filters to narrow down your data selection even further. When using the where method, you can provide multiple filter criteria within the same call.
+
+Example:
+
+```JavaScript
+const manager = new RangeManager({ sheet: 'Sales' });
+
+// Combine multiple filters using logical AND
+manager.where({ product: 'Laptop', price: { between: [500, 1000] }});
+
+// Combine filters to find products that are either in stock or have a high rating
+manager.where({ stock: { gt: 0 }, rating: { gte: 4.5 } });
+```
+
+By combining filters, you can create complex queries to extract the specific data you need from your spreadsheet. The filters are applied in a logical AND fashion, meaning all filter criteria must be met for a row to be included in the result.
