@@ -43,10 +43,115 @@ new RangeManager({sheet: 'Users'}).where({age: {between: [18, 65]}})
 // Filter a list of Users with ages between 18 and 65
 ```
 
+#### deepEqual
+* Usage: `{ column: { deepEqual: value } }`
+* Filters values in the column that are strictly equal to value (same type and value).
+* Returns: All rows with values in the column that are strictly equal to value.
+
+```JavaScript
+new RangeManager({ sheet: 'Products' }).where({ category: { deepEqual: 'Electronics' } });
+// Filter products in the 'Electronics' category
+```
+
+#### equal (Implicit vs. Explicit)
+> Implicit Usage: `{ column: value }`
+* Filters values in the column that are equal to `value`. This comparison checks if the values are the same, allowing for implicit type conversion, which means it may treat different data types as equal.
+* Returns: All rows with values in the column that are equal to value.
+
+```JavaScript
+new RangeManager({ sheet: 'Inventory' }).where({ quantity: 0  });
+// Filter items with zero quantity in the inventory
+```
+
+> Explicit Usage: `{ column: { equal: value } }`
+* Filters values in the column that are equal to value. This comparison checks if the values are the same, considering both value and data type.
+* Returns: All rows with values in the column that are equal to value.
+
+```JavaScript
+new RangeManager({ sheet: 'Inventory' }).where({ quantity: { equal: 0 } });
+// Filter items with zero quantity in the inventory
+```
+
+#### excludes
+* Usage: `{ column: { excludes: [value1, value2, valueN] } }`
+* Filters values in the column that are not in the specified list.
+* Returns: All rows with values in the column that are not in the list.
+
+```JavaScript
+new RangeManager({ sheet: 'Products' }).where({ status: { excludes: ['Out of stock', 'Discontinued'] } });
+// Filter products not marked as 'Out of stock' or 'Discontinued'
+```
+
+#### gte
+* Usage: `{ column: { gte: value } }`
+* Filters values in the column that are greater than or equal to value.
+* Returns: All rows with values in the column greater than or equal to value.
+
+```JavaScript
+new RangeManager({ sheet: 'Sales' }).where({ revenue: { gte: 1000 } });
+// Filter sales with revenue greater than or equal to 1000
+```
+
+#### gt
+* Usage: `{ column: { gt: value } }`
+* Filters values in the column that are greater than value.
+* Returns: All rows with values in the column greater than value.
+
+```JavaScript
+new RangeManager({ sheet: 'Orders' }).where({ orderTotal: { gt: 50 } });
+// Filter orders with a total greater than 50
+```
+
+#### includes
+
+* Usage: { column: { includes: [value1, value2, valueN] } }
+* Filters values in the column that are in the specified list.
+* Returns: All rows with values in the column that are in the list.
+
+```JavaScript
+new RangeManager({ sheet: 'Inventory' }).where({ productType: { includes: ['Laptop', 'Tablet'] } });
+// Filter products with the type 'Laptop' or 'Tablet'
+```
+
+#### lt
+* Usage: { column: { lt: value } }
+* Filters values in the column that are less than value.
+* Returns: All rows with values in the column less than value.
+
+```JavaScript
+new RangeManager({ sheet: 'Expenses' }).where({ amount: { lt: 100 } });
+// Filter expenses with an amount less than 100
+```
+
+#### lte
+* Usage: { column: { lte: value } }
+* Filters values in the column that are less than or equal to value.
+* Returns: All rows with values in the column less than or equal to value.
 
 
+```JavaScript
+new RangeManager({ sheet: 'Prices' }).where({ price: { lte: 20 } });
+// Filter products with a price less than or equal to 20
+```
 
+#### match
+* Usage: `{ column: { match: /pattern/ } }`
+* Filters values in the column that match the specified regular expression.
+* Returns: All rows with values in the column that match the regular expression.
 
+```JavaScript
+new RangeManager({ sheet: 'Texts' }).where({ content: { match: /important keyword/i } });
+// Filter texts containing the 'important keyword' case-insensitively
+```
 
-  
+#### matchAny
+
+* Usage: `{ column: { matchAny: [/pattern1, /pattern2/] } }`
+* Filters values in the column that match at least one of the specified regular expressions.
+* Returns: All rows with values in the column that match at least one of the regular expressions.
+
+```JavaScript
+new RangeManager({ sheet: 'Messages' }).where({ text: { matchAny: [/hello/i, /goodbye/i] } });
+// Filter messages containing either 'hello' or 'goodbye' case-insensitively
+```
 
