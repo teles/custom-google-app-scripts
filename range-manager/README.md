@@ -172,3 +172,52 @@ manager.where({ stock: { gt: 0 }, rating: { gte: 4.5 } });
 ```
 
 By combining filters, you can create complex queries to extract the specific data you need from your spreadsheet. The filters are applied in a logical AND fashion, meaning all filter criteria must be met for a row to be included in the result.
+
+## update(data)
+
+Updates the data in the specified ranges with the provided data.
+
+* data (Object, optional): The data to update the ranges.
+* Returns the current instance of `RangeManager` to support chained calls.
+
+Consider a sample spreadsheet representing inventory:
+
+| Product    | Quantity | Price | Status    |
+|------------|----------|-------|-----------|
+| Laptop     | 5        | 800   | In Stock  |
+| Smartphone | 10       | 600   | In Stock  |
+| Tablet     | 0        | 300   | Out Stock |
+| Camera     | 2        | 1200  | In Stock  |
+
+Now, let's apply the where method to select all items with a quantity greater than 0 and then update them with a new status:
+
+```JavaScript
+const manager = new RangeManager({ sheet: 'Inventory' });
+
+// Apply a filter to select items with quantity greater than 0
+manager.where({
+  Quantity: { gt: 0 }
+});
+
+// Define the data to update
+const updateData = {
+  Status: 'In Stock (Updated)'
+};
+
+// Update the selected records with the new data
+manager.update(updateData);
+```
+
+After applying the where method, we have selected the following records:
+
+| Product    | Quantity | Price | Status              |
+|------------|----------|-------|---------------------|
+| Laptop     | 5        | 800   | In Stock (Updated) |
+| Smartphone | 10       | 600   | In Stock (Updated) |
+| Tablet     | 0        | 300   | Out Stock           |
+| Camera     | 2        | 1200  | In Stock (Updated) |
+
+
+After applying the where method to select items with a quantity greater than 0, we can update the status of these records with the provided data. In this example, the status of selected items has been updated to "In Stock (Updated)" using the update method.
+
+This demonstrates how to use the update method in conjunction with the where method to modify data within specific ranges, making it a powerful tool for managing and updating spreadsheet information.
